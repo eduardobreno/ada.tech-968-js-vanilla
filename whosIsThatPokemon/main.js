@@ -38,10 +38,13 @@ async function init() {
 
   choicesContainer.innerHTML = "";
   shuffle(selectedPokemons).forEach((p) => {
-    choicesContainer.innerHTML += `<button class="${p.name}">${p.name}</button>`;
-  });
+    const parser = new DOMParser();
+    const btn = parser.parseFromString(
+      `<button class="${p.name}">${p.name}</button>`,
+      "text/html"
+    );
 
-  selectedPokemons.forEach((p) => {
+    choicesContainer.appendChild(btn.getRootNode().body.childNodes[0]);
     choicesContainer
       .querySelector(`.${p.name}`)
       .addEventListener("click", () => {
@@ -50,6 +53,9 @@ async function init() {
 
         if (p.name === whosIsThat.name) {
           console.log("Ganhou!");
+          const word = new SpeechSynthesisUtterance(whosIsThat.name);
+          word.voice = speechSynthesis.getVoices()[10];
+          speechSynthesis.speak(word);
         } else {
           console.log("Perdeu");
         }
