@@ -42,6 +42,20 @@ function leftLeg() {
   context.stroke();
 }
 
+function suporte() {
+  context.strokeStyle = '#444';
+  context.lineWidth = 10;
+  context.beginPath();
+  context.moveTo(175, 225);
+  context.lineTo(5, 225);
+  context.moveTo(40, 225);
+  context.lineTo(25, 5);
+  context.lineTo(100, 5);
+  context.lineTo(100, 25);
+  context.stroke();
+}
+
+suporte();
 head();
 body();
 leftArm();
